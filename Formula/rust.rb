@@ -91,7 +91,7 @@ class Rust < Formula
       args << "--release-channel=stable"
     end
 
-    if Hardware::CPU.arm?
+    if Hardware::CPU.arm? && !build.head?
       # Fix for 1.49.0-beta, remove when the stable version is released
       inreplace "src/stage0.txt", "1.48.0", "beta"
       inreplace "src/stage0.txt", "2020-11-19", "2020-12-23"
