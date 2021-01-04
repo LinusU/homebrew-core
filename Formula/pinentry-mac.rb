@@ -3,7 +3,7 @@ class PinentryMac < Formula
   homepage "https://github.com/GPGTools/pinentry-mac"
   url "https://github.com/GPGTools/pinentry-mac/archive/v0.9.4.tar.gz"
   sha256 "037ebb010377d3a3879ae2a832cefc4513f5c397d7d887d7b86b4e5d9a628271"
-  license "GPL-2.0"
+  license all_of: ["GPL-2.0-or-later", "GPL-3.0-or-later"]
   head "https://github.com/GPGTools/pinentry-mac.git"
 
   bottle do
