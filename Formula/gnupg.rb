@@ -4,6 +4,7 @@ class Gnupg < Formula
   url "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-2.2.27.tar.bz2"
   sha256 "34e60009014ea16402069136e0a5f63d9b65f90096244975db5cea74b3d02399"
   license "GPL-3.0-or-later"
+  revision 1
 
   livecheck do
     url "https://gnupg.org/ftp/gcrypt/gnupg/"
@@ -28,6 +29,14 @@ class Gnupg < Formula
   depends_on "libusb"
   depends_on "npth"
   depends_on "pinentry"
+
+  # This patch is a workaround for a bug in gpg-agent when a wrong password from the cache is returned by
+  # pinentry-mac. Without this patch, the agent would let pinentry-mac remove the password from the cache and return
+  # a BAD_PASSPHRASE error. With this patch, the agent asks pinentry-mac again to get a password from the user.
+  patch do
+    url "https://raw.githubusercontent.com/GPGTools/MacGPG2/7770678e923741ca6d9f0f1a4d5cdf3971250754/patches/gnupg/agent-cache-bug-workaround.patch"
+    sha256 "c68158c7f7f1a6bceed9a8e2f429faf3c83d75e6144e16a6c2ed0fdce4a2e17f"
+  end
 
   def install
     system "./configure", "--disable-dependency-tracking",
